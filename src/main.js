@@ -2,7 +2,8 @@ const title = document.querySelector('h1');
 const text = document.querySelectorAll('p');
 const button = document.querySelector('button');
 const fingerTitle = document.querySelector('h2');
-
+const result=document.querySelector('#result');
+result.style.display='none';
 fingerTitle.style.display = 'none';
 text[1].style.display = 'none';
 text[2].style.display = 'none';
