@@ -45,7 +45,7 @@ await video.play();
 
 
 video.style.borderRadius='16px';
-text[2].textContent ='Reading your signal...';
+setTimeout(() => { text[2].style.display = 'none'; result.style.display = 'block'; result.textContent = 'Check complete.'; stream.getTracks().forEach(track => track.stop()); video.style.display = 'none'; }, 30000);
 setTimeout(() => { text[2].textContent = 'Check complete.'; stream.getTracks().forEach(track => track.stop()); video.style.display = 'none'; }, 30000);
 
   } catch (error) {
