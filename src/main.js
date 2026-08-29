@@ -45,7 +45,7 @@ await video.play();
 
 video.style.borderRadius='16px';
 text[2].textContent ='Reading your signal...';
-
+setTimeout(()=>{text[2].textContent='Check complete.';},30000);
 
   } catch (error) {
     text[2].textContent = 'Camera could not start.';
