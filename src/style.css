@@ -293,4 +293,11 @@ code {
     right: 0;
     border-right-color: var(--border);
   }
+
+  video {
+    display: block !important;
+    width: 320px !important;
+    height: 240px !important;
+    background: black !important;
+  }
 }

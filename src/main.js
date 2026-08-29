@@ -15,17 +15,39 @@ button.addEventListener('click', async () => {
   fingerTitle.style.display = 'block';
   text[1].style.display = 'block';
   text[2].style.display = 'block';
+  text[2].textContent = 'Requesting camera...';
 
   try {
-    alert('REQUESTING CAMERA');
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment' }
+      video: true,
+      audio: false
     });
 
-    alert('CAMERA READY');
-    const video = document. createElement('video');
-    
-    } catch (error) {
-    alert('CAMERA PERMISSION NEEDED');
+const video=document.querySelector('#camera')
+video.srcObject=stream;
+video.autoplay = true;
+video.muted = true;
+video.playsInline = true;
+video.style.width = '100%';
+video.style.maxWidth = '100%';
+video.style.display = 'block';
+video.style.height='300px';
+video.style.objectFit='cover';
+
+
+
+await video.play();
+
+
+
+
+
+
+
+text[2].textContent ='Reading your signal...'; 
+     } catch (error) {
+    text[2].textContent = 'Camera could not start.';
+    console.error(error);
   }
 });
+   
