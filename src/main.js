@@ -42,7 +42,7 @@ video.style.objectFit='cover';
 
 
 
-samplingInterval = setInterval(() => {
+window.samplingInterval = setInterval(() => {
   if (video.readyState < 2) return;
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
   const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
