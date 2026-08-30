@@ -54,6 +54,7 @@ window.samplingInterval = setInterval(() => {
   samples.push(averageRed);
   if (samples.length >= 300) clearInterval(samplingInterval);
   if (samples.length === 300) console.log('Samples captured:', samples.length);
+  
 }, 100);
 
 
