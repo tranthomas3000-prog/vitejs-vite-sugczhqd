@@ -46,7 +46,7 @@ await video.play();
 
 video.style.borderRadius='16px';
 
-setTimeout(() => { text[2].style.display = 'none'; result.style.display = 'block'; result.textContent = 'Check complete.'; stream.getTracks().forEach(track => track.stop()); video.style.display = 'none'; }, 30000);
+setTimeout(() => { text[2].style.display = 'none'; result.style.display = 'block'; result.textContent = 'YOUR CHECK'; stream.getTracks().forEach(track => track.stop()); video.style.display = 'none'; }, 30000);
 
   } catch (error) {
     text[2].textContent = 'Camera could not start.';
