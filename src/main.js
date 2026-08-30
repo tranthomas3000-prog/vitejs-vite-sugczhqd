@@ -6,6 +6,7 @@ const result=document.querySelector('#result');
 const canvas = document.querySelector('#cameraCanvas');
 const ctx = canvas.getContext('2d');
 const samples=[];
+let samplingInternal;
 result.style.display='none';
 fingerTitle.style.display = 'none';
 text[1].style.display = 'none';
