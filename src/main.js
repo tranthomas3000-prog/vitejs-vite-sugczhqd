@@ -42,6 +42,16 @@ video.style.objectFit='cover';
 
 
 await video.play();
+samplingInterval = setInterval(() => {
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  let total=0;
+  for (let i = 0; i < frame.data.length; i += 4) {
+    total+= frame.data[i];
+  }
+  const averageRed = total / (frame.data.length / 4);
+  samples.push(averageRed);
+}, 100);
 
 
 
