@@ -51,6 +51,7 @@ samplingInterval = setInterval(() => {
   }
   const averageRed = total / (frame.data.length / 4);
   samples.push(averageRed);
+  if (samples.length >= 300) clearInterval(samplingInterval);
 }, 100);
 
 
