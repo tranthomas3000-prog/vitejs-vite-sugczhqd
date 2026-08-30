@@ -6,7 +6,7 @@ const result=document.querySelector('#result');
 const canvas = document.querySelector('#cameraCanvas');
 const ctx = canvas.getContext('2d');
 const samples=[];
-let samplingInternal;
+let samlingInternal;
 result.style.display='none';
 fingerTitle.style.display = 'none';
 text[1].style.display = 'none';
@@ -43,6 +43,7 @@ video.style.objectFit='cover';
 
 
 samplingInterval = setInterval(() => {
+  if (video.readyState < 2) return;
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
   const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
   let total=0;
@@ -65,7 +66,7 @@ video.style.borderRadius='16px';
 setTimeout(() => { text[2].style.display = 'none'; result.style.display = 'block'; result.textContent = 'YOUR CHECK'; stream.getTracks().forEach(track => track.stop()); video.style.display = 'none'; }, 30000);
 
   } catch (error) {
-    text[2].textContent = 'Camera could not start.';
+    text[2].textContent = error.message;
     console.error(error);
   }
 });
