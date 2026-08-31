@@ -60,6 +60,7 @@ window.samplingInterval = setInterval(() => {
     const max = Math.max(...samples);
     const range = max - min;
     console.log('Signal range:', range);
+    result.textContent = 'Signal range: ' + range.toFixed(2);
   }
   
 }, 100);
@@ -71,8 +72,7 @@ window.samplingInterval = setInterval(() => {
 
 video.style.borderRadius='16px';
 
-setTimeout(() => { text[2].style.display = 'none'; result.style.display = 'block'; result.textContent = 'YOUR CHECK'; stream.getTracks().forEach(track => track.stop()); video.style.display = 'none'; }, 30000);
-
+setTimeout(() => { text[2].style.display = 'none'; result.style.display = 'block'; stream.getTracks().forEach(track => track.stop()); video.style.display = 'none'; }, 30000);
   } catch (error) {
     text[2].textContent = error.message;
     console.error(error);
