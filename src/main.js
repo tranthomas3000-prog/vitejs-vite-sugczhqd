@@ -62,7 +62,17 @@ window.samplingInterval = setInterval(() => {
     console.log('Signal range:', range);
     result.textContent = 'Signal range: ' + range.toFixed(2);
     const signalQuality = range > 1 ? 'GOOD SIGNAL' : 'WEAK SIGNAL';
-    result.textContent = signalQuality + ' — Range: ' + range.toFixed(2);
+    const mean = samples.reduce((sum, value) => sum + value, 0) / samples.length;
+    const centered = samples.map(value => value - mean);
+    let peaks= 0;
+    for (let i = 1; i < centered.length - 1; i++) {
+      if (centered[i] > centered[i - 1] && centered[i] > centered[i + 1] && centered[i] > 0) peaks++;
+    }
+    const bpm = Math.round(peaks * 2);
+    result.textContent = signalQuality + ' — BPM: ' + bpm + ' — Range: ' + range.toFixed(2);
+    
+    
+    
   }
   
 }, 100);
