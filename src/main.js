@@ -61,6 +61,8 @@ window.samplingInterval = setInterval(() => {
     const range = max - min;
     console.log('Signal range:', range);
     result.textContent = 'Signal range: ' + range.toFixed(2);
+    const signalQuality = range > 1 ? 'GOOD SIGNAL' : 'WEAK SIGNAL';
+    result.textContent = signalQuality + ' — Range: ' + range.toFixed(2);
   }
   
 }, 100);
