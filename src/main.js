@@ -70,8 +70,11 @@ window.samplingInterval = setInterval(() => {
     for (let i = 1; i < centered.length - 1; i++) {
       if (smoothed[i] > smoothed[i - 1] && smoothed[i] > smoothed[i + 1] && smoothed[i] > 0 && i - lastPeak >= 5) { peaks++; lastPeak = i; }
     }
-    let bestLag = 0;
-let bestCorrelation = -Infinity;
+    const pulseSignal = smoothed.slice(1).map((value, i) => value - smoothed[i]);
+    let bestLag= 0;
+    let bestCorrelation = -Infinity;
+
+
 for (let lag = 6; lag <= 15; lag++) {
   let correlation= 0;
   for (let i = 0; i < smoothed.length - lag; i++) correlation += smoothed[i] * smoothed[i + lag];
