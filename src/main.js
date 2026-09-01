@@ -64,12 +64,21 @@ window.samplingInterval = setInterval(() => {
     const signalQuality = range > 1 ? 'GOOD SIGNAL' : 'WEAK SIGNAL';
     const mean = samples.reduce((sum, value) => sum + value, 0) / samples.length;
     const centered = samples.map(value => value - mean);
+    const smoothed = centered.map((value, i, arr) => i === 0 || i === arr.length - 1 ? value : (arr[i - 1] + value + arr[i + 1]) / 3);
     let peaks= 0;
     let lastPeak= -10;
     for (let i = 1; i < centered.length - 1; i++) {
-      if (centered[i] > centered[i - 1] && centered[i] > centered[i + 1] && centered[i] > 0 && i - lastPeak >= 3) { peaks++; lastPeak = i; }
+      if (smoothed[i] > smoothed[i - 1] && smoothed[i] > smoothed[i + 1] && smoothed[i] > 0 && i - lastPeak >= 5) { peaks++; lastPeak = i; }
     }
-    const bpm = Math.round(peaks * 2);
+    let bestLag = 0;
+let bestCorrelation = -Infinity;
+for (let lag = 6; lag <= 15; lag++) {
+  let correlation= 0;
+  for (let i = 0; i < smoothed.length - lag; i++) correlation += smoothed[i] * smoothed[i + lag];
+  correlation = correlation / (smoothed.length - lag);
+  if (correlation > bestCorrelation) { bestCorrelation = correlation; bestLag = lag; }
+}
+const bpm = Math.round(600 / bestLag);
     result.textContent = signalQuality + ' — BPM: ' + bpm + ' — Range: ' + range.toFixed(2);
     
     
