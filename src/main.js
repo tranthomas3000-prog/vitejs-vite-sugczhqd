@@ -65,8 +65,9 @@ window.samplingInterval = setInterval(() => {
     const mean = samples.reduce((sum, value) => sum + value, 0) / samples.length;
     const centered = samples.map(value => value - mean);
     let peaks= 0;
+    let lastPeak= -10;
     for (let i = 1; i < centered.length - 1; i++) {
-      if (centered[i] > centered[i - 1] && centered[i] > centered[i + 1] && centered[i] > 0) peaks++;
+      if (centered[i] > centered[i - 1] && centered[i] > centered[i + 1] && centered[i] > 0 && i - lastPeak >= 3) { peaks++; lastPeak = i; }
     }
     const bpm = Math.round(peaks * 2);
     result.textContent = signalQuality + ' — BPM: ' + bpm + ' — Range: ' + range.toFixed(2);
